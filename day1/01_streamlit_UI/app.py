@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import time
 import datetime
+import io
 
 # ============================================
 # ページ設定
@@ -62,6 +63,7 @@ if uploaded:
 # ============================================
 
 # 旅程表の表示
+df_plan = pd.DataFrame()
 if st.button("📝 最終プランを表示"):
     st.balloons()
     st.subheader("🎉 あなたの旅行プラン")
@@ -74,6 +76,12 @@ if st.button("📝 最終プランを表示"):
         plan_data.append([day.strftime("%Y-%m-%d"), morning, afternoon, night])
     df_plan = pd.DataFrame(plan_data, columns=["日付", "午前", "午後", "夜"])
     st.table(df_plan)
+
+# ダウンロード
+if not df_plan.empty:
+    # CSVダウンロード
+    csv = df_plan.to_csv(index=False).encode("utf-8")
+    st.download_button("📥 CSVでダウンロード", data=csv, file_name="travel_plan.csv", mime="text/csv")
 
 
 # メトリクス表示
