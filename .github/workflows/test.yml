@@ -40,7 +40,6 @@ jobs:
       run: |
         pytest day5/演習3/tests/test_model.py -v
 
-    # 最新モデルのテスト（精度・推論時間）
-    - name: Run model inference performance and reproducibility tests
+    - name: Run model regression tests
       run: |
-        pytest day5/演習3/tests/test_model.py -v
+        pytest day5/演習3/tests/test_model_regression.py -v
