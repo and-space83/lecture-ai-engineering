@@ -7,10 +7,12 @@ MODEL_DIR = os.path.join(os.path.dirname(__file__), "../models")
 NEW_MODEL_PATH = os.path.join(MODEL_DIR, "titanic_model.pkl")
 REFERENCE_MODEL_PATH = os.path.join(MODEL_DIR, "titanic_model_reference.pkl")
 
+
 def test_model_regression():
     """モデルの精度が過去モデルより劣化していないかチェック"""
     if not (os.path.exists(NEW_MODEL_PATH) and os.path.exists(REFERENCE_MODEL_PATH)):
         import pytest
+
         pytest.skip("モデルファイルが不足しています")
 
     with open(NEW_MODEL_PATH, "rb") as f:
@@ -25,7 +27,9 @@ def test_model_regression():
     data = pd.read_csv(os.path.join(os.path.dirname(__file__), "../data/Titanic.csv"))
     X = data.drop("Survived", axis=1)
     y = data["Survived"].astype(int)
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=42
+    )
 
     acc_new = accuracy_score(y_test, new_model.predict(X_test))
     acc_ref = accuracy_score(y_test, ref_model.predict(X_test))

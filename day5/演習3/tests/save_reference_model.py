@@ -13,6 +13,7 @@ DATA_PATH = os.path.join(os.path.dirname(__file__), "../data/Titanic.csv")
 MODEL_DIR = os.path.join(os.path.dirname(__file__), "../models")
 MODEL_PATH = os.path.join(MODEL_DIR, "titanic_model_reference.pkl")
 
+
 def sample_data():
     """テスト用データセットを読み込む"""
     if not os.path.exists(DATA_PATH):
@@ -31,6 +32,7 @@ def sample_data():
         df.to_csv(DATA_PATH, index=False)
 
     return pd.read_csv(DATA_PATH)
+
 
 # データ読み込み
 data = sample_data()
